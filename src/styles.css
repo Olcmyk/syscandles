@@ -31,6 +31,40 @@ body {
     gap: 8px;
 }
 
+#zoom-controls {
+    display: flex;
+    gap: 4px;
+}
+
+#zoom-controls button {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: #3d3d3d;
+    border: 1px solid #4d4d4d;
+    color: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#zoom-controls button:hover {
+    background: #4d4d4d;
+}
+
+#zoom-controls button:active {
+    background: #5d5d5d;
+}
+
+#zoom-reset {
+    font-size: 16px;
+}
+
 .period-btn {
     padding: 6px 16px;
     background: #3d3d3d;

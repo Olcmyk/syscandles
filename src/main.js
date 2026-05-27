@@ -32,6 +32,17 @@ class ChartView {
                 timeVisible: true,
                 secondsVisible: true,
             },
+            handleScroll: {
+                mouseWheel: true,
+                pressedMouseMove: true,
+                horzTouchDrag: true,
+                vertTouchDrag: true,
+            },
+            handleScale: {
+                axisPressedMouseMove: true,
+                mouseWheel: true,
+                pinch: true,
+            },
         });
 
         this.candlestickSeries = this.chart.addCandlestickSeries({
@@ -82,6 +93,36 @@ class ChartView {
     clear() {
         this.candlestickSeries.setData([]);
     }
+
+    zoomIn() {
+        const timeScale = this.chart.timeScale();
+        const logicalRange = timeScale.getVisibleLogicalRange();
+        if (logicalRange) {
+            const center = (logicalRange.from + logicalRange.to) / 2;
+            const newRange = (logicalRange.to - logicalRange.from) * 0.7; // 缩小范围30%
+            timeScale.setVisibleLogicalRange({
+                from: center - newRange / 2,
+                to: center + newRange / 2,
+            });
+        }
+    }
+
+    zoomOut() {
+        const timeScale = this.chart.timeScale();
+        const logicalRange = timeScale.getVisibleLogicalRange();
+        if (logicalRange) {
+            const center = (logicalRange.from + logicalRange.to) / 2;
+            const newRange = (logicalRange.to - logicalRange.from) * 1.3; // 扩大范围30%
+            timeScale.setVisibleLogicalRange({
+                from: center - newRange / 2,
+                to: center + newRange / 2,
+            });
+        }
+    }
+
+    resetZoom() {
+        this.chart.timeScale().fitContent();
+    }
 }
 
 class App {
@@ -131,6 +172,19 @@ class App {
                 const period = e.target.dataset.period;
                 this.switchPeriod(period);
             });
+        });
+
+        // 缩放控制按钮
+        document.getElementById('zoom-in').addEventListener('click', () => {
+            this.chart.zoomIn();
+        });
+
+        document.getElementById('zoom-out').addEventListener('click', () => {
+            this.chart.zoomOut();
+        });
+
+        document.getElementById('zoom-reset').addEventListener('click', () => {
+            this.chart.resetZoom();
         });
     }
 
