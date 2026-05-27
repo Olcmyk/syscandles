@@ -31,6 +31,7 @@ class ChartView {
             timeScale: {
                 timeVisible: true,
                 secondsVisible: true,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             },
             handleScroll: {
                 mouseWheel: true,
@@ -61,6 +62,7 @@ class ChartView {
         });
 
         console.log('Chart initialized successfully');
+        console.log('Detected timezone:', Intl.DateTimeFormat().resolvedOptions().timeZone);
     }
 
     setData(klineData) {
