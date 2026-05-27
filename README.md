@@ -1,20 +1,68 @@
 # macOS Candles
 
+[English](#english) | [中文](#中文)
+
+## English
+
+A macOS system monitoring application that visualizes system metrics as candlestick charts.
+
+### Features
+
+Real-time monitoring and candlestick chart visualization of system metrics:
+- CPU Usage
+- CPU Temperature
+- Memory Usage
+- Disk Usage
+- Network Upload Speed
+- Network Download Speed
+
+### Tech Stack
+
+- **Tauri 2** - Cross-platform desktop application framework
+- **Rust** - System monitoring data collection
+- **JavaScript** - Frontend interaction
+- **Lightweight Charts** - Candlestick chart rendering
+
+### Database Storage
+
+The application stores monitoring data in a SQLite database located at:
+
+**macOS:** `~/Library/Application Support/com.macoscandles.app/data.db`
+
+This database contains historical system metrics collected at regular intervals. You can delete this file to clear all historical data.
+
+---
+
+## 中文
+
 一个将 macOS 系统监控数据以 K 线图形式可视化的应用。
 
-## 功能
+### 功能
 
 实时监控并以 K 线图（蜡烛图）展示系统指标：
 - CPU 使用率
 - CPU 温度
 - 内存使用情况
+- 磁盘使用情况
+- 网络上传速度
+- 网络下载速度
 
-## 技术栈
+### 技术栈
 
 - **Tauri 2** - 跨平台桌面应用框架
 - **Rust** - 系统监控数据采集
 - **JavaScript** - 前端交互
 - **Lightweight Charts** - K 线图渲染
+
+### 数据库存储
+
+应用程序将监控数据存储在 SQLite 数据库中，位置为：
+
+**macOS:** `~/Library/Application Support/com.macoscandles.app/data.db`
+
+该数据库包含定期收集的历史系统指标数据。您可以删除此文件以清除所有历史数据。
+
+---
 
 ## License
 
