@@ -154,7 +154,7 @@ class App {
             console.log('App initialized successfully');
         } catch (error) {
             console.error('Failed to initialize app:', error);
-            this.showError('应用初始化失败: ' + error.message);
+            this.showError('Application initialization failed: ' + error.message);
         }
     }
 
@@ -194,7 +194,7 @@ class App {
             console.log('Data collection started');
         } catch (error) {
             console.error('Failed to start collection:', error);
-            this.showError('启动数据采集失败');
+            this.showError('Failed to start data collection');
         }
     }
 
@@ -232,7 +232,7 @@ class App {
             }
         } catch (error) {
             console.error('Failed to load data:', error);
-            this.showError('加载数据失败: ' + error);
+            this.showError('Failed to load data: ' + error);
         }
     }
 
