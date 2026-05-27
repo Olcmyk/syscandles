@@ -31,7 +31,6 @@ class ChartView {
             timeScale: {
                 timeVisible: true,
                 secondsVisible: true,
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             },
             handleScroll: {
                 mouseWheel: true,
@@ -62,7 +61,17 @@ class ChartView {
         });
 
         console.log('Chart initialized successfully');
-        console.log('Detected timezone:', Intl.DateTimeFormat().resolvedOptions().timeZone);
+        const detectedTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        console.log('Detected timezone:', detectedTz);
+
+        // Calculate timezone offset in seconds
+        this.timezoneOffset = new Date().getTimezoneOffset() * -60;
+        console.log('Timezone offset (seconds):', this.timezoneOffset);
+    }
+
+    // Convert UTC timestamp to local time for display
+    convertToLocalTime(utcTimestamp) {
+        return utcTimestamp + this.timezoneOffset;
     }
 
     setData(klineData) {
@@ -71,7 +80,7 @@ class ChartView {
         }
 
         const formattedData = klineData.map(k => ({
-            time: k.time,
+            time: this.convertToLocalTime(k.time),
             open: k.open,
             high: k.high,
             low: k.low,
@@ -84,7 +93,7 @@ class ChartView {
 
     updateData(klinePoint) {
         this.candlestickSeries.update({
-            time: klinePoint.time,
+            time: this.convertToLocalTime(klinePoint.time),
             open: klinePoint.open,
             high: klinePoint.high,
             low: klinePoint.low,
