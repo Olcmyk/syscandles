@@ -203,7 +203,7 @@ class App {
 
         try {
             const endTime = Math.floor(Date.now() / 1000);
-            const startTime = endTime - 3600;
+            const startTime = 0;  // 从最早的数据开始
 
             console.log('Loading historical data:', {
                 indicator: this.currentIndicator,

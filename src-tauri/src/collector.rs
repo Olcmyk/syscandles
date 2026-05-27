@@ -32,7 +32,7 @@ impl DataCollector {
             *running = true;
         }
 
-        let mut interval_timer = interval(Duration::from_secs(5));
+        let mut interval_timer = interval(Duration::from_secs(1));
 
         loop {
             interval_timer.tick().await;
