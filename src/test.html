@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1e1e1e;
+            color: #fff;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        #output {
+            background: #2d2d2d;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tauri API Test</h1>
+    <button onclick="testGetHistoricalData()">Test get_historical_data</button>
+    <button onclick="testGetLatestData()">Test get_latest_data</button>
+    <button onclick="clearOutput()">Clear Output</button>
+    <div id="output"></div>
+
+    <script type="module">
+        import { invoke } from '@tauri-apps/api/core';
+
+        window.testGetHistoricalData = async function() {
+            const output = document.getElementById('output');
+            output.textContent += '\n=== Testing get_historical_data ===\n';
+
+            try {
+                const endTime = Math.floor(Date.now() / 1000);
+                const startTime = endTime - 3600;
+
+                output.textContent += `Calling API with:\n`;
+                output.textContent += `  indicator: cpu\n`;
+                output.textContent += `  period: 1min\n`;
+                output.textContent += `  startTime: ${startTime}\n`;
+                output.textContent += `  endTime: ${endTime}\n\n`;
+
+                const data = await invoke('get_historical_data', {
+                    indicator: 'cpu',
+                    period: '1min',
+                    startTime: startTime,
+                    endTime: endTime,
+                });
+
+                output.textContent += `✅ Success! Received ${data.length} K-lines\n`;
+
+                if (data.length > 0) {
+                    output.textContent += `\nFirst K-line:\n`;
+                    output.textContent += JSON.stringify(data[0], null, 2) + '\n';
+
+                    output.textContent += `\nLast K-line:\n`;
+                    output.textContent += JSON.stringify(data[data.length - 1], null, 2) + '\n';
+                }
+            } catch (error) {
+                output.textContent += `❌ Error: ${error}\n`;
+                console.error('API Error:', error);
+            }
+        };
+
+        window.testGetLatestData = async function() {
+            const output = document.getElementById('output');
+            output.textContent += '\n=== Testing get_latest_data ===\n';
+
+            try {
+                const data = await invoke('get_latest_data');
+                output.textContent += `✅ Success!\n`;
+                output.textContent += JSON.stringify(data, null, 2) + '\n';
+            } catch (error) {
+                output.textContent += `❌ Error: ${error}\n`;
+                console.error('API Error:', error);
+            }
+        };
+
+        window.clearOutput = function() {
+            document.getElementById('output').textContent = '';
+        };
+
+        // Auto-run test on load
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('output').textContent = 'Page loaded. Click buttons to test API.\n';
+        });
+    </script>
+</body>
+</html>

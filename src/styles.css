@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #1e1e1e;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: #2d2d2d;
+    border-bottom: 1px solid #3d3d3d;
+}
+
+#period-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.period-btn {
+    padding: 6px 16px;
+    background: #3d3d3d;
+    border: 1px solid #4d4d4d;
+    color: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.period-btn:hover:not(.disabled) {
+    background: #4d4d4d;
+}
+
+.period-btn.active {
+    background: #0066cc;
+    border-color: #0066cc;
+}
+
+.period-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#date-selector {
+    color: #aaaaaa;
+    font-size: 14px;
+}
+
+#main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+#indicator-list {
+    width: 150px;
+    background: #2d2d2d;
+    border-right: 1px solid #3d3d3d;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.indicator-btn {
+    padding: 12px;
+    background: #3d3d3d;
+    border: 1px solid #4d4d4d;
+    color: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.indicator-btn:hover {
+    background: #4d4d4d;
+}
+
+.indicator-btn.active {
+    background: #0066cc;
+    border-color: #0066cc;
+}
+
+#chart-container {
+    flex: 1;
+    position: relative;
+    padding: 20px;
+    background: #1e1e1e;
+}
+
+#chart {
+    width: 100%;
+    height: 100%;
+}
+
+#loading,
+#error,
+#no-data {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #aaaaaa;
+}
+
+#error {
+    color: #ff6b6b;
+}
+
+.hidden {
+    display: none;
+}
