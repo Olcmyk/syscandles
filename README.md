@@ -1,6 +1,7 @@
 # macOS Candles
 
 [English](#english) | [中文](#中文)
+<img width="1194" height="800" alt="图片" src="https://github.com/user-attachments/assets/7f5f4b16-c5a5-4a82-a180-c2bb6d9ad58e" />
 
 ## English
 
